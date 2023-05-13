@@ -13,9 +13,11 @@ import { GameParams } from '../../@types/navigation';
 import { Heading } from '../../components/Heading';
 import { Background } from '../../components/Background';
 import { DuoCard, DuoCardProps } from '../../components/DuoCard';
+import { DuoMatch } from '../../components/DuoMatch';
 
 export function Games() {
   const [duos, setDuos] = useState<DuoCardProps[]>([])
+  const [discordDuoSelected, setDiscordDuoSelected] = useState('fred#0987')
 
   const navigation = useNavigation()
   const route = useRoute()
@@ -26,7 +28,7 @@ export function Games() {
   }
 
   useEffect(() => {
-    fetch(`http://953d-37-120-207-54.ngrok.io/games/${game.id}/ads`)
+    fetch(`https://edc8-62-210-245-199.ngrok-free.app/games/${game.id}/ads`)
       .then(response => response.json())
       .then(data => setDuos(data)
       )
@@ -76,6 +78,12 @@ export function Games() {
             </Text>
           )}
         />
+        <DuoMatch
+          visible={discordDuoSelected.length > 0}
+          discord='fred#0987'
+          onClose={() => setDiscordDuoSelected('')}
+        />
+
       </SafeAreaView>
     </Background>
   );
