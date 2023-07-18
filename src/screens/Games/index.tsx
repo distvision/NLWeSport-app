@@ -17,7 +17,7 @@ import { DuoMatch } from '../../components/DuoMatch';
 
 export function Games() {
   const [duos, setDuos] = useState<DuoCardProps[]>([])
-  const [discordDuoSelected, setDiscordDuoSelected] = useState('fred#0987')
+  const [discordDuoSelected, setDiscordDuoSelected] = useState('')
 
   const navigation = useNavigation()
   const route = useRoute()
@@ -27,8 +27,14 @@ export function Games() {
     navigation.goBack()
   }
 
+  async function getDiscordUser(adsId: string) {
+    fetch(`https://8450-148-113-152-59.ngrok-free.app/ads/${adsId}/discord`)
+      .then(response => response.json())
+      .then(data => setDiscordDuoSelected(data.discord))
+  }
+
   useEffect(() => {
-    fetch(`https://edc8-62-210-245-199.ngrok-free.app/games/${game.id}/ads`)
+    fetch(`https://8450-148-113-152-59.ngrok-free.app/games/${game.id}/ads`)
       .then(response => response.json())
       .then(data => setDuos(data)
       )
@@ -65,7 +71,7 @@ export function Games() {
           keyExtractor={item => item.id}
           renderItem={({ item }) => (
             <DuoCard data={item}
-              onConnetc={() => { }}
+              onConnetc={() => getDiscordUser(item.id)}
             />
           )}
           horizontal
@@ -80,7 +86,7 @@ export function Games() {
         />
         <DuoMatch
           visible={discordDuoSelected.length > 0}
-          discord='fred#0987'
+          discord={discordDuoSelected}
           onClose={() => setDiscordDuoSelected('')}
         />
 
