@@ -28,13 +28,13 @@ export function Games() {
   }
 
   async function getDiscordUser(adsId: string) {
-    fetch(`https://8450-148-113-152-59.ngrok-free.app/ads/${adsId}/discord`)
+    fetch(`https://394b-162-19-234-113.ngrok-free.app/ads/${adsId}/discord`)
       .then(response => response.json())
       .then(data => setDiscordDuoSelected(data.discord))
   }
 
   useEffect(() => {
-    fetch(`https://8450-148-113-152-59.ngrok-free.app/games/${game.id}/ads`)
+    fetch(`https://394b-162-19-234-113.ngrok-free.app/games/${game.id}/ads`)
       .then(response => response.json())
       .then(data => setDuos(data)
       )

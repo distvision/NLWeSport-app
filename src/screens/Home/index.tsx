@@ -20,7 +20,7 @@ export function Home() {
   }
 
   useEffect(() => {
-    fetch('https://8450-148-113-152-59.ngrok-free.app/games')
+    fetch('https://394b-162-19-234-113.ngrok-free.app/games')
       .then(response => response.json())
       .then(data => setGames(data)
       )
